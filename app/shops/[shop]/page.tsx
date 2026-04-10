@@ -270,14 +270,14 @@ export default async function ShopDetailPage({
 
         <div className="metrics-grid">
           <div className="card">
-            <div className="metric-label">Produkte</div>
+            <div className="metric-label">Inhalte</div>
             <div className="metric-value">{shop.productCount}</div>
             <div className="small">Duplikat-Kandidaten: {shop.duplicateCandidateCount}</div>
           </div>
           <div className="card">
             <div className="metric-label">Response Cache</div>
             <div className="metric-value">{shop.responseCacheEntryCount}</div>
-            <div className="small">Shop-bezogene Antwort-Cache-Einträge</div>
+            <div className="small">Zielbezogene Antwort-Cache-Einträge</div>
           </div>
           <div className="card">
             <div className="metric-label">Commerce</div>
@@ -293,7 +293,7 @@ export default async function ShopDetailPage({
 
         <div className="layout-grid">
           <div className="card">
-            <h2 className="section-title">Shop-Kernzustand</h2>
+            <h2 className="section-title">Ziel-Kernzustand</h2>
             <div className="kpi-row"><span>Plan</span><strong>{shop.plan}</strong></div>
             <div className="kpi-row"><span>Installiert am</span><strong>{shop.installedAt}</strong></div>
             <div className="kpi-row"><span>Letzter Sync</span><strong>{shop.lastSyncAt}</strong></div>
