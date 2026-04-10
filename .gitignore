@@ -1,0 +1,32 @@
+.vercel
+# dependencies
+node_modules/
+
+# next build output
+.next/
+out/
+
+# local env
+.env.local
+.env*.local
+
+# runtime / caches
+logs/
+*.log
+tsconfig.tsbuildinfo
+
+# local tool / deployment state
+.vercel/
+.data/
+
+# backups
+*.bak
+*.bak-*
+
+# os/editor
+.DS_Store
+# local milestone snapshots
+*.milestone-*
+
+# local milestone snapshots
+*.milestone-*
