@@ -141,16 +141,16 @@ function buildNextAction(input: {
   commerceLastStatus: string;
 }): string {
   if (input.productCount === 0) {
-    return "Shop-Installation, Token und Produkt-Sync sofort prüfen";
+    return "Installation, Zugriffsdaten und Inhaltssynchronisierung sofort prüfen";
   }
   if (input.staleSync) {
-    return "Produkt-Sync und Webhooks prüfen";
+    return "Inhaltssynchronisierung und Event-Anbindung prüfen";
   }
   if (input.commerceLastStatus === "error") {
-    return "Commerce-Flow und Draft-Order-Fehler prüfen";
+    return "Commerce-Flow und Aktionsfehler prüfen";
   }
   if (input.duplicateCandidateCount > 0) {
-    return "Katalog-Duplikate und Titelqualität prüfen";
+    return "Inhaltsduplikate und Benennungsqualität prüfen";
   }
   if (input.brainRequestCount24h > 0 && input.brainCacheHitCount24h === 0) {
     return "Brain-Cache-Verhalten und Query-Normalisierung prüfen";
@@ -490,8 +490,8 @@ async function loadRealOverviewData() {
         id: `no-products-${shop.shopDomain}`,
         shopDomain: shop.shopDomain,
         severity: "error",
-        title: "Keine Produkte gefunden",
-        detail: "Für diesen Shop wurden aktuell keine Produkte im Katalog gefunden."
+        title: "Keine verwertbaren Inhalte gefunden",
+        detail: "Für dieses Ziel wurden aktuell keine verwertbaren Inhalte oder Angebote gefunden."
       });
     }
 
@@ -511,7 +511,7 @@ async function loadRealOverviewData() {
         shopDomain: shop.shopDomain,
         severity: "warn",
         title: "Potenzielle Duplikate",
-        detail: `${shop.duplicateCandidateCount} doppelte Produkttitel erkannt.`
+        detail: `${shop.duplicateCandidateCount} doppelte Inhaltstitel oder Bezeichnungen erkannt.`
       });
     }
 
