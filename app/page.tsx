@@ -20,7 +20,7 @@ export default async function HomePage() {
               Priorisierung aller aktiven EFRO-Ziele.
             </p>
             <p className="small" style={{ marginTop: 10 }}>
-              Datenquelle: <strong>{source === "supabase" ? "Supabase live" : "Mock-Fallback"}</strong>
+              Datenquelle: <strong>{source === "supabase" ? "Supabase live" : "Fallback-Daten"}</strong>
             </p>
           </div>
 
@@ -71,7 +71,7 @@ export default async function HomePage() {
                   <th>Ziel</th>
                   <th>Status</th>
                   <th>Inhalte</th>
-                  <th>Response Cache</th>
+                  <th>Antwort-Cache</th>
                   <th>Commerce</th>
                   <th>Letzter Sync</th>
                   <th>Letzter Chat</th>

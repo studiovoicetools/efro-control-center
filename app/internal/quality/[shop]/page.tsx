@@ -135,7 +135,7 @@ export default async function InternalQualityPage({ params }: PageProps) {
         >
           <div>
             <div style={{ fontSize: 13, fontWeight: 700, color: "#60a5fa", letterSpacing: 0.3 }}>
-              EFRO Internal Quality Center
+              EFRO Qualitätszentrale
             </div>
             <h1 style={{ margin: "8px 0 0", fontSize: 34, lineHeight: 1.1 }}>
               Qualitätslage für {shopDomain}
@@ -170,12 +170,12 @@ export default async function InternalQualityPage({ params }: PageProps) {
             marginBottom: 24,
           }}
         >
-          {card("Readiness Score", data.readinessScore, "Aus Health + Live-Signalen abgeleitet")}
+          {card("Bereitschaftsgrad", data.readinessScore, "Aus Health + Live-Signalen abgeleitet")}
           {card("Inhalte", data.currentState.productCount, "Verfügbare Basis für Empfehlungen")}
           {card("Gespräche 24h", data.currentState.brainRequestCount24h, "Aktuelle Nutzungsintensität")}
           {card("Commerce-Aktionen", data.currentState.commerceActionCount, "Verkaufsnahe Signale")}
           {card("Duplikate", data.currentState.duplicateCandidateCount, "Inhalts-Schwächen sofort sichtbar")}
-          {card("Settings-Quelle", data.settingsSource, `Snapshot: ${data.snapshotSource}`)}
+          {card("Konfigurationsquelle", data.settingsSource, `Snapshot: ${data.snapshotSource}`)}
         </div>
 
         <div
@@ -220,7 +220,7 @@ export default async function InternalQualityPage({ params }: PageProps) {
               Handoff öffnen
             </Link>
             <Link href={data.links.evidence} style={{ color: "#93c5fd", textDecoration: "none", fontWeight: 700 }}>
-              Evidence öffnen
+              Nachweise öffnen
             </Link>
             <Link href={data.links.config} style={{ color: "#93c5fd", textDecoration: "none", fontWeight: 700 }}>
               Konfiguration öffnen

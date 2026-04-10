@@ -248,7 +248,7 @@ export default async function AdminPage() {
             }}
           >
             <div style={{ fontSize: 12, color: "#9fb0e0" }}>Quelle</div>
-            <div style={{ fontSize: 16, fontWeight: 700 }}>{data?.source || "unknown"}</div>
+            <div style={{ fontSize: 16, fontWeight: 700 }}>{data?.source || "unbekannt"}</div>
             <div style={{ fontSize: 12, color: "#b7c3ea", marginTop: 6 }}>
               Interner Bereich. Freeze/Main bleibt unberührt.
             </div>
@@ -274,7 +274,7 @@ export default async function AdminPage() {
           {box(
             "Globaler Audio-Cache",
             Number(summary.globalAudioCacheEntryCount || 0),
-            `Hits: ${Number(summary.globalAudioCacheHitCount || 0)}`
+            `Treffer: ${Number(summary.globalAudioCacheHitCount || 0)}`
           )}
           {box(
             "Kosten 24h",
@@ -378,9 +378,9 @@ export default async function AdminPage() {
                       padding: 12,
                     }}
                   >
-                    <div style={{ fontWeight: 700, fontSize: 14 }}>{alert.title || "Alert"}</div>
+                    <div style={{ fontWeight: 700, fontSize: 14 }}>{alert.title || "Hinweis"}</div>
                     <div style={{ color: "#c7d3f5", fontSize: 13, marginTop: 4 }}>
-                      {alert.shopDomain || "unknown"}
+                      {alert.shopDomain || "unbekannt"}
                     </div>
                     <div style={{ color: "#aebce8", fontSize: 13, marginTop: 6 }}>
                       {alert.detail || ""}
