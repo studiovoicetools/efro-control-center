@@ -171,10 +171,10 @@ export default async function InternalQualityPage({ params }: PageProps) {
           }}
         >
           {card("Readiness Score", data.readinessScore, "Aus Health + Live-Signalen abgeleitet")}
-          {card("Produkte", data.currentState.productCount, "Verfügbare Basis für Empfehlungen")}
+          {card("Inhalte", data.currentState.productCount, "Verfügbare Basis für Empfehlungen")}
           {card("Gespräche 24h", data.currentState.brainRequestCount24h, "Aktuelle Nutzungsintensität")}
           {card("Commerce-Aktionen", data.currentState.commerceActionCount, "Verkaufsnahe Signale")}
-          {card("Duplikate", data.currentState.duplicateCandidateCount, "Katalog-Schwächen sofort sichtbar")}
+          {card("Duplikate", data.currentState.duplicateCandidateCount, "Inhalts-Schwächen sofort sichtbar")}
           {card("Settings-Quelle", data.settingsSource, `Snapshot: ${data.snapshotSource}`)}
         </div>
 
@@ -198,7 +198,7 @@ export default async function InternalQualityPage({ params }: PageProps) {
             marginBottom: 24,
           }}
         >
-          {listCard("Produktgruppen-Signale", data.productGroupSignals)}
+          {listCard("Bereichs-Signale", data.productGroupSignals)}
           {listCard("Begriffe mit Trainingsbedarf", data.trainingSignals)}
         </div>
 
@@ -214,7 +214,7 @@ export default async function InternalQualityPage({ params }: PageProps) {
           {sectionTitle("Direkte Werkzeuge")}
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 14 }}>
             <Link href={data.links.merchant} style={{ color: "#93c5fd", textDecoration: "none", fontWeight: 700 }}>
-              Merchant Dashboard öffnen
+              Dashboard öffnen
             </Link>
             <Link href={data.links.handoff} style={{ color: "#93c5fd", textDecoration: "none", fontWeight: 700 }}>
               Handoff öffnen
@@ -223,7 +223,7 @@ export default async function InternalQualityPage({ params }: PageProps) {
               Evidence öffnen
             </Link>
             <Link href={data.links.config} style={{ color: "#93c5fd", textDecoration: "none", fontWeight: 700 }}>
-              Shop-Config öffnen
+              Konfiguration öffnen
             </Link>
           </div>
 
