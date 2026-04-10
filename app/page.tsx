@@ -17,10 +17,10 @@ export default async function HomePage() {
             <h1 className="page-title">EFRO Control Center</h1>
             <p className="page-subtitle">
               Phase 1 MVP für Sichtbarkeit, Fehlerkontrolle, Kostenüberwachung und
-              Priorisierung aller installierten EFRO-Shops.
+              Priorisierung aller aktiven EFRO-Ziele.
             </p>
             <p className="small" style={{ marginTop: 10 }}>
-              Datenquelle: <strong>{source === "supabase" ? "Supabase live" : "Mock-Fallback"}</strong>
+              Datenquelle: <strong>{source === "supabase" ? "Supabase live" : "Fallback-Daten"}</strong>
             </p>
           </div>
 
@@ -40,17 +40,17 @@ export default async function HomePage() {
 
         <div className="metrics-grid">
           <MetricCard
-            label="Shops gesamt"
+            label="Ziele gesamt"
             value={String(summary.totalShops)}
-            hint="Alle aktuell überwachten Shops"
+            hint="Alle aktuell überwachten Ziele"
           />
           <MetricCard
-            label="Rote Shops"
+            label="Rote Ziele"
             value={String(summary.redShops)}
             hint="Sofortige Aufmerksamkeit erforderlich"
           />
           <MetricCard
-            label="Gelbe Shops"
+            label="Gelbe Ziele"
             value={String(summary.yellowShops)}
             hint="Beobachten und gezielt stabilisieren"
           />
@@ -63,15 +63,15 @@ export default async function HomePage() {
 
         <div className="layout-grid">
           <div className="card table-wrap">
-            <h2 className="section-title">Shop-Übersicht nach Priorität</h2>
+            <h2 className="section-title">Ziel-Übersicht nach Priorität</h2>
             <table>
               <thead>
                 <tr>
                   <th>Prio</th>
-                  <th>Shop</th>
+                  <th>Ziel</th>
                   <th>Status</th>
-                  <th>Produkte</th>
-                  <th>Response Cache</th>
+                  <th>Inhalte</th>
+                  <th>Antwort-Cache</th>
                   <th>Commerce</th>
                   <th>Letzter Sync</th>
                   <th>Letzter Chat</th>
@@ -139,7 +139,7 @@ export default async function HomePage() {
                 <strong>{summary.globalAudioCacheHitCount}</strong>
               </div>
               <div className="small" style={{ marginTop: 10 }}>
-                Audio-Cache ist aktuell global und noch nicht shop-genau attributierbar.
+                Audio-Cache ist aktuell global und noch nicht zielgenau attributierbar.
               </div>
             </div>
           </div>

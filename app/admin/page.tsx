@@ -232,9 +232,9 @@ export default async function AdminPage() {
           }}
         >
           <div>
-            <h1 style={{ margin: 0, fontSize: 34, lineHeight: 1.1 }}>EFRO Admin</h1>
+            <h1 style={{ margin: 0, fontSize: 34, lineHeight: 1.1 }}>EFRO Operator-Zentrale</h1>
             <p style={{ margin: "10px 0 0", color: "#b7c3ea", fontSize: 15 }}>
-              Operator-Ansicht für Shops, Watchdog, Qualität, Merchant-Dashboard und Freeze-Status.
+              Operator-Ansicht für Ziele, Watchdog, Qualität, Dashboard und Freeze-Status.
             </p>
           </div>
 
@@ -248,7 +248,7 @@ export default async function AdminPage() {
             }}
           >
             <div style={{ fontSize: 12, color: "#9fb0e0" }}>Quelle</div>
-            <div style={{ fontSize: 16, fontWeight: 700 }}>{data?.source || "unknown"}</div>
+            <div style={{ fontSize: 16, fontWeight: 700 }}>{data?.source || "unbekannt"}</div>
             <div style={{ fontSize: 12, color: "#b7c3ea", marginTop: 6 }}>
               Interner Bereich. Freeze/Main bleibt unberührt.
             </div>
@@ -263,18 +263,18 @@ export default async function AdminPage() {
             marginBottom: 24,
           }}
         >
-          {box("Gesamt Shops", Number(summary.totalShops || 0), "Aktive Operator-Sicht")}
-          {box("Rote Shops", Number(summary.redShops || 0), "Kritische Priorität")}
-          {box("Gelbe Shops", Number(summary.yellowShops || 0), "Beobachten")}
+          {box("Gesamt Ziele", Number(summary.totalShops || 0), "Aktive Operator-Sicht")}
+          {box("Rote Ziele", Number(summary.redShops || 0), "Kritische Priorität")}
+          {box("Gelbe Ziele", Number(summary.yellowShops || 0), "Beobachten")}
           {box(
             "Ø Brain-Cache-Hit-Rate",
             `${Math.round(Number(summary.avgBrainCacheHitRate || 0) * 100)}%`,
-            "Über alle Shops mit Requests"
+            "Über alle Ziele mit Requests"
           )}
           {box(
-            "Global Audio Cache",
+            "Globaler Audio-Cache",
             Number(summary.globalAudioCacheEntryCount || 0),
-            `Hits: ${Number(summary.globalAudioCacheHitCount || 0)}`
+            `Treffer: ${Number(summary.globalAudioCacheHitCount || 0)}`
           )}
           {box(
             "Kosten 24h",
@@ -299,10 +299,10 @@ export default async function AdminPage() {
               padding: 18,
             }}
           >
-            <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 14 }}>Top kritische Shops</div>
+            <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 14 }}>Top kritische Ziele</div>
             <div style={{ display: "grid", gap: 12 }}>
               {criticalShops.length === 0 ? (
-                <div style={{ color: "#b7c3ea" }}>Keine kritischen Shops vorhanden.</div>
+                <div style={{ color: "#b7c3ea" }}>Keine kritischen Ziele vorhanden.</div>
               ) : (
                 criticalShops.map((shop) => (
                   <div
@@ -328,23 +328,23 @@ export default async function AdminPage() {
                           {shop.nextAction || "Beobachten"}
                         </div>
                         <div style={{ marginTop: 10, display: "flex", gap: 12, flexWrap: "wrap" }}>
-                          {shopLink(shop.shopDomain, "/merchant", "Merchant")}
-                          {shopLink(shop.shopDomain, "/internal/quality", "Quality")}
+                          {shopLink(shop.shopDomain, "/merchant", "Dashboard")}
+                          {shopLink(shop.shopDomain, "/internal/quality", "Qualität")}
                           {shopLink(shop.shopDomain, "/api/ops/handoff?shop=", "Handoff")}
-                          {shopLink(shop.shopDomain, "/api/ops/evidence", "Evidence")}
-                          {shopLink(shop.shopDomain, "/api/ops/shop-config", "Config")}
+                          {shopLink(shop.shopDomain, "/api/ops/evidence", "Nachweise")}
+                          {shopLink(shop.shopDomain, "/api/ops/shop-config", "Konfiguration")}
                         </div>
                       </div>
                       <div style={{ textAlign: "right", minWidth: 150 }}>
                         <div style={{ fontSize: 13, color: "#9fb0e0" }}>
-                          Health {Number(shop.healthScore || 0)} / Priority {Number(shop.priorityScore || 0)}
+                          Health {Number(shop.healthScore || 0)} / Priorität {Number(shop.priorityScore || 0)}
                         </div>
                         <div style={{ marginTop: 8 }}>
                           <Link
                             href={`/shops/${encodeURIComponent(shop.shopDomain || "")}`}
                             style={{ color: "#8cb3ff", textDecoration: "none", fontWeight: 700 }}
                           >
-                            Shop-Detail öffnen
+                            Ziel-Detail öffnen
                           </Link>
                         </div>
                       </div>
@@ -378,9 +378,9 @@ export default async function AdminPage() {
                       padding: 12,
                     }}
                   >
-                    <div style={{ fontWeight: 700, fontSize: 14 }}>{alert.title || "Alert"}</div>
+                    <div style={{ fontWeight: 700, fontSize: 14 }}>{alert.title || "Hinweis"}</div>
                     <div style={{ color: "#c7d3f5", fontSize: 13, marginTop: 4 }}>
-                      {alert.shopDomain || "unknown"}
+                      {alert.shopDomain || "unbekannt"}
                     </div>
                     <div style={{ color: "#aebce8", fontSize: 13, marginTop: 6 }}>
                       {alert.detail || ""}
@@ -447,7 +447,7 @@ export default async function AdminPage() {
                 padding: 14,
               }}
             >
-              <div style={{ fontSize: 12, color: "#9fb0e0", marginBottom: 8 }}>Summary-Status</div>
+              <div style={{ fontSize: 12, color: "#9fb0e0", marginBottom: 8 }}>Live-Summary</div>
               <div>
                 <span
                   style={{
@@ -495,7 +495,7 @@ export default async function AdminPage() {
                 padding: 14,
               }}
             >
-              <div style={{ fontSize: 12, color: "#9fb0e0", marginBottom: 8 }}>Public Health</div>
+              <div style={{ fontSize: 12, color: "#9fb0e0", marginBottom: 8 }}>Public-Health</div>
               <div style={{ fontSize: 24, fontWeight: 700, color: "#ffffff" }}>
                 {efroSummary?.public_health_consecutive_failures ?? "—"} / {efroSummary?.public_health_incident_threshold ?? "—"}
               </div>
@@ -531,7 +531,7 @@ export default async function AdminPage() {
               marginBottom: 14,
             }}
           >
-            <div style={{ fontSize: 18, fontWeight: 700 }}>Shop-Übersicht</div>
+            <div style={{ fontSize: 18, fontWeight: 700 }}>Ziel-Übersicht</div>
             <div style={{ display: "flex", gap: 14, flexWrap: "wrap", fontSize: 13 }}>
               <Link href="/api/ops/overview" style={{ color: "#8cb3ff", textDecoration: "none" }}>
                 /api/ops/overview
@@ -545,13 +545,13 @@ export default async function AdminPage() {
           <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 1360 }}>
             <thead>
               <tr style={{ textAlign: "left", color: "#9fb0e0", fontSize: 12 }}>
-                <th style={{ padding: "10px 8px" }}>Shop</th>
+                <th style={{ padding: "10px 8px" }}>Ziel</th>
                 <th style={{ padding: "10px 8px" }}>Status</th>
-                <th style={{ padding: "10px 8px" }}>Produkte</th>
+                <th style={{ padding: "10px 8px" }}>Inhalte</th>
                 <th style={{ padding: "10px 8px" }}>Response Cache</th>
-                <th style={{ padding: "10px 8px" }}>Brain Req 24h</th>
-                <th style={{ padding: "10px 8px" }}>Brain Cache Hits</th>
-                <th style={{ padding: "10px 8px" }}>Audio Cache</th>
+                <th style={{ padding: "10px 8px" }}>Brain-Anfragen 24h</th>
+                <th style={{ padding: "10px 8px" }}>Brain-Cache-Hits</th>
+                <th style={{ padding: "10px 8px" }}>Audio-Cache</th>
                 <th style={{ padding: "10px 8px" }}>Commerce</th>
                 <th style={{ padding: "10px 8px" }}>Kosten 24h</th>
                 <th style={{ padding: "10px 8px" }}>Direkte Links</th>

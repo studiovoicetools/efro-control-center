@@ -85,11 +85,11 @@ export default async function OnboardingPage({ params }: PageProps) {
               EFRO Onboarding
             </div>
             <h1 style={{ margin: "8px 0 0", fontSize: 38, lineHeight: 1.05 }}>
-              Richte deinen KI-Verkäufer für {shopDomain} ein
+              Richte EFRO für {shopDomain} ein
             </h1>
             <p style={{ margin: "12px 0 0", fontSize: 16, color: "#475569", maxWidth: 820 }}>
-              Wähle den passenden Avatar, die richtige Stimme und die Sprache für deinen Shop.
-              Später kannst du alles jederzeit wieder im Merchant-Dashboard ändern.
+              Wähle den passenden Avatar, die richtige Stimme und die Sprache für dein Ziel.
+              Später kannst du alles jederzeit wieder im Dashboard ändern.
             </p>
           </div>
 
@@ -106,7 +106,7 @@ export default async function OnboardingPage({ params }: PageProps) {
             <div style={{ fontSize: 12, color: "#64748b" }}>Aktueller Stand</div>
             <div style={{ marginTop: 10, display: "flex", gap: 10, flexWrap: "wrap" }}>
               {badge(settings.onboardingCompleted ? "Onboarding fertig" : "Onboarding offen", settings.onboardingCompleted)}
-              {badge(Number(overview.productCount || 0) > 0 ? "Shop verbunden" : "Shop prüfen", Number(overview.productCount || 0) > 0)}
+              {badge(Number(overview.productCount || 0) > 0 ? "Ziel verbunden" : "Ziel prüfen", Number(overview.productCount || 0) > 0)}
             </div>
             <div style={{ marginTop: 12, fontSize: 13, color: "#475569" }}>
               Aktueller Avatar: {avatar?.label || "Nicht gewählt"}
@@ -127,8 +127,8 @@ export default async function OnboardingPage({ params }: PageProps) {
         >
           {stepCard("1", "Avatar wählen", "Wähle den Charakter, der am besten zu deiner Marke passt.", true)}
           {stepCard("2", "Stimme wählen", "Gib EFRO eine Stimme, die seriös, freundlich oder verkaufsstark wirkt.", true)}
-          {stepCard("3", "Sprache festlegen", "Stelle sicher, dass EFRO zur tatsächlichen Shop-Sprache passt.", true)}
-          {stepCard("4", "Speichern & starten", "Mit einem Klick speicherst du alles für deinen Shop.", true)}
+          {stepCard("3", "Sprache festlegen", "Stelle sicher, dass EFRO zur tatsächlichen Zielsprache passt.", true)}
+          {stepCard("4", "Speichern & starten", "Mit einem Klick speicherst du alles für dein Ziel.", true)}
         </div>
 
         <div
@@ -148,7 +148,7 @@ export default async function OnboardingPage({ params }: PageProps) {
             availableAvatars={data.availableAvatars}
             availableVoices={data.availableVoices}
             submitLabel="Onboarding speichern"
-            successMessage="Onboarding gespeichert. Du wirst gleich zum Merchant-Dashboard weitergeleitet."
+            successMessage="Onboarding gespeichert. Du wirst gleich zum Dashboard weitergeleitet."
             redirectHref={`/merchant/${encodeURIComponent(shopDomain)}`}
             showOnboardingLink={false}
           />
@@ -206,7 +206,7 @@ export default async function OnboardingPage({ params }: PageProps) {
                 <div style={{ fontSize: 12, color: "#64748b", marginBottom: 6 }}>Sprache</div>
                 <div style={{ fontSize: 18, fontWeight: 700 }}>{settings.selectedLanguage || "de"}</div>
                 <div style={{ marginTop: 6, fontSize: 13, color: "#475569" }}>
-                  Diese Auswahl sollte zur echten Shop- und Produktsprache passen.
+                  Diese Auswahl sollte zur echten Ziel- und Inhaltssprache passen.
                 </div>
               </div>
 
@@ -244,7 +244,7 @@ export default async function OnboardingPage({ params }: PageProps) {
                   fontWeight: 700,
                 }}
               >
-                Zum Merchant-Dashboard
+                Zum Dashboard
               </Link>
             </div>
           </section>
