@@ -79,7 +79,7 @@ Im Verlauf nach dem ursprünglichen Handoff wurde `efro-control-center` als echt
 Relevante Branches:
 - `main` = Initialimport
 - `parallel/neutralize-quality-language-20260410` = konsolidierter Arbeitsbranch mit dem Sprach-Cleanup
-- `parallel/neutralize-quality-language-20260410-wt` = technischer Hilfs-/Worktree-Branch
+- `parallel/prioritize-next-action-20260410` = Branch für die Priorisierung von `buildNextAction()`
 
 Konsequenz:
 - die frühere Aussage, der Worktree-/Git-Flow für `efro-control-center` sei nicht zuverlässig nutzbar, war für den damaligen Stand richtig
@@ -88,7 +88,35 @@ Konsequenz:
 
 ---
 
-## 4. Was weiterhin offen bleibt
+## 4. Verifiziert erreicht: fachliche Priorisierung in `buildNextAction()`
+
+Die zuvor noch offene Priorisierungsfrage in `buildNextAction()` ist inzwischen **bewusst entschieden und live verifiziert**.
+
+Frühere Reihenfolge:
+1. fehlende Inhaltsbasis
+2. stale sync
+3. Commerce-Fehler
+
+Jetzt gültige Reihenfolge:
+1. fehlende Inhaltsbasis
+2. Commerce-Fehler
+3. stale sync
+
+Ziel dieser Änderung:
+- bei gemischten Problemfällen soll die operativ schärfere Aktion sichtbar werden
+- Commerce-Fehler sollen nicht mehr von einem gleichzeitig vorhandenen stale-sync-Fall überdeckt werden
+
+Live verifiziert in `/api/ops/watchdog`:
+- für `avatarsalespro-dev.myshopify.com` zeigt `criticalShops.nextAction` jetzt `Commerce-Flow und Aktionsfehler prüfen`
+- für `avatarsalespro-dev.myshopify.com` zeigt `commerceErrorShops.nextAction` jetzt ebenfalls `Commerce-Flow und Aktionsfehler prüfen`
+
+Konsequenz:
+- die frühere Aussage, `staleSync` gewinne aktuell vor dem Commerce-Fehler, ist **überholt**
+- die Priorisierungsfrage ist für den jetzt verifizierten Stand **nicht mehr offen**
+
+---
+
+## 5. Was weiterhin offen bleibt
 
 Trotz der verifizierten Fortschritte bleiben diese Punkte offen:
 
@@ -96,9 +124,9 @@ Trotz der verifizierten Fortschritte bleiben diese Punkte offen:
    - `shopDomain`, `merchant`, `productCount` und weitere Altsemantiken bestehen weiterhin in anderen Bereichen
    - das ist keine unmittelbare Runtime-Störung, aber fachlich noch nicht Endzustand
 
-2. **Fachliche Priorisierung in `buildNextAction()`**
-   - aktuell gewinnt bei gleichzeitigen Problemen z. B. `staleSync` vor dem Commerce-Fehler
-   - das ist keine kaputte Funktion, sondern eine noch bewusst zu entscheidende Priorisierungsfrage
+2. **Weitere Feinschliffe in der Operativlogik**
+   - auch nach der neuen Priorisierung kann es weitere sinnvolle Schärfungen geben, z. B. in Overview-/Triage-Formulierungen oder zusätzlichen Prioritätsregeln
+   - das ist aber kein Grundreparaturpunkt mehr
 
 3. **Keine Änderungen an anderen Repos aus diesem Chat ableiten**
    - die Systemgrenze des ursprünglichen Handoffs bleibt bestehen:
@@ -106,7 +134,7 @@ Trotz der verifizierten Fortschritte bleiben diese Punkte offen:
 
 ---
 
-## 5. Aktualisierte Kurzfassung für den Nachfolger
+## 6. Aktualisierte Kurzfassung für den Nachfolger
 
 Wenn du nur den jetzt gültigen Kurzstand brauchst:
 
@@ -115,14 +143,13 @@ Wenn du nur den jetzt gültigen Kurzstand brauchst:
 - `handoff`, `shop`, `quality` lesen `efroAgent` / `liveTruth`.
 - `quality` liefert jetzt **verifiziert** auch `targetContext`.
 - `quality` und `watchdog` zeigen in den live geprüften Pfaden bereits neutralisierte Sprache.
+- `buildNextAction()` priorisiert jetzt nach fehlender Inhaltsbasis den Commerce-Fehler vor stale sync.
 - `efro-control-center` ist jetzt als Git-Repo mit Remote und Branches arbeitsfähig.
-- Nächster sinnvoller Schritt ist **nicht mehr** `quality.targetContext`, sondern:
-  - weitere sprachliche Harmonisierung
-  - und ggf. die fachliche Priorisierung von `nextAction`
+- Nächster sinnvoller Schritt ist nicht mehr Grundreparatur, sondern weitere Restharmonisierung und Feinschliff.
 
 ---
 
-## 6. Merksatz nach aktuellem Stand
+## 7. Merksatz nach aktuellem Stand
 
 **Live-Wahrheit = EFRO-Agent-Watchdog.**
 
@@ -130,4 +157,6 @@ Wenn du nur den jetzt gültigen Kurzstand brauchst:
 
 **`quality.targetContext` = verifiziert geschlossen.**
 
-**Nächste Arbeit = Restharmonisierung und Priorisierungsfeinschliff, nicht mehr Grundreparatur.**
+**`buildNextAction()`-Priorisierung = bewusst angepasst und live verifiziert.**
+
+**Nächste Arbeit = Restharmonisierung und Feinschliff, nicht mehr Grundreparatur.**
