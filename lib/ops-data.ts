@@ -143,11 +143,11 @@ function buildNextAction(input: {
   if (input.productCount === 0) {
     return "Installation, Zugriffsdaten und Inhaltssynchronisierung sofort prüfen";
   }
-  if (input.staleSync) {
-    return "Inhaltssynchronisierung und Event-Anbindung prüfen";
-  }
   if (input.commerceLastStatus === "error") {
     return "Commerce-Flow und Aktionsfehler prüfen";
+  }
+  if (input.staleSync) {
+    return "Inhaltssynchronisierung und Event-Anbindung prüfen";
   }
   if (input.duplicateCandidateCount > 0) {
     return "Inhaltsduplikate und Benennungsqualität prüfen";
