@@ -234,7 +234,7 @@ export default async function AdminPage() {
           <div>
             <h1 style={{ margin: 0, fontSize: 34, lineHeight: 1.1 }}>EFRO Admin</h1>
             <p style={{ margin: "10px 0 0", color: "#b7c3ea", fontSize: 15 }}>
-              Operator-Ansicht für Shops, Watchdog, Qualität, Merchant-Dashboard und Freeze-Status.
+              Operator-Ansicht für Ziele, Watchdog, Qualität, Dashboard und Freeze-Status.
             </p>
           </div>
 
@@ -263,13 +263,13 @@ export default async function AdminPage() {
             marginBottom: 24,
           }}
         >
-          {box("Gesamt Shops", Number(summary.totalShops || 0), "Aktive Operator-Sicht")}
-          {box("Rote Shops", Number(summary.redShops || 0), "Kritische Priorität")}
-          {box("Gelbe Shops", Number(summary.yellowShops || 0), "Beobachten")}
+          {box("Gesamt Ziele", Number(summary.totalShops || 0), "Aktive Operator-Sicht")}
+          {box("Rote Ziele", Number(summary.redShops || 0), "Kritische Priorität")}
+          {box("Gelbe Ziele", Number(summary.yellowShops || 0), "Beobachten")}
           {box(
             "Ø Brain-Cache-Hit-Rate",
             `${Math.round(Number(summary.avgBrainCacheHitRate || 0) * 100)}%`,
-            "Über alle Shops mit Requests"
+            "Über alle Ziele mit Requests"
           )}
           {box(
             "Global Audio Cache",
@@ -299,10 +299,10 @@ export default async function AdminPage() {
               padding: 18,
             }}
           >
-            <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 14 }}>Top kritische Shops</div>
+            <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 14 }}>Top kritische Ziele</div>
             <div style={{ display: "grid", gap: 12 }}>
               {criticalShops.length === 0 ? (
-                <div style={{ color: "#b7c3ea" }}>Keine kritischen Shops vorhanden.</div>
+                <div style={{ color: "#b7c3ea" }}>Keine kritischen Ziele vorhanden.</div>
               ) : (
                 criticalShops.map((shop) => (
                   <div
@@ -328,7 +328,7 @@ export default async function AdminPage() {
                           {shop.nextAction || "Beobachten"}
                         </div>
                         <div style={{ marginTop: 10, display: "flex", gap: 12, flexWrap: "wrap" }}>
-                          {shopLink(shop.shopDomain, "/merchant", "Merchant")}
+                          {shopLink(shop.shopDomain, "/merchant", "Dashboard")}
                           {shopLink(shop.shopDomain, "/internal/quality", "Quality")}
                           {shopLink(shop.shopDomain, "/api/ops/handoff?shop=", "Handoff")}
                           {shopLink(shop.shopDomain, "/api/ops/evidence", "Evidence")}
@@ -344,7 +344,7 @@ export default async function AdminPage() {
                             href={`/shops/${encodeURIComponent(shop.shopDomain || "")}`}
                             style={{ color: "#8cb3ff", textDecoration: "none", fontWeight: 700 }}
                           >
-                            Shop-Detail öffnen
+                            Ziel-Detail öffnen
                           </Link>
                         </div>
                       </div>
@@ -531,7 +531,7 @@ export default async function AdminPage() {
               marginBottom: 14,
             }}
           >
-            <div style={{ fontSize: 18, fontWeight: 700 }}>Shop-Übersicht</div>
+            <div style={{ fontSize: 18, fontWeight: 700 }}>Ziel-Übersicht</div>
             <div style={{ display: "flex", gap: 14, flexWrap: "wrap", fontSize: 13 }}>
               <Link href="/api/ops/overview" style={{ color: "#8cb3ff", textDecoration: "none" }}>
                 /api/ops/overview
@@ -545,9 +545,9 @@ export default async function AdminPage() {
           <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 1360 }}>
             <thead>
               <tr style={{ textAlign: "left", color: "#9fb0e0", fontSize: 12 }}>
-                <th style={{ padding: "10px 8px" }}>Shop</th>
+                <th style={{ padding: "10px 8px" }}>Ziel</th>
                 <th style={{ padding: "10px 8px" }}>Status</th>
-                <th style={{ padding: "10px 8px" }}>Produkte</th>
+                <th style={{ padding: "10px 8px" }}>Inhalte</th>
                 <th style={{ padding: "10px 8px" }}>Response Cache</th>
                 <th style={{ padding: "10px 8px" }}>Brain Req 24h</th>
                 <th style={{ padding: "10px 8px" }}>Brain Cache Hits</th>
