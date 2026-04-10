@@ -121,7 +121,7 @@ export async function GET() {
       .map((shop) => ({
         shopDomain: shop.shopDomain || "unknown",
         productCount: Number(shop.productCount || 0),
-        nextAction: shop.nextAction || "Shop-Installation pruefen",
+        nextAction: shop.nextAction || "Installation und Anbindung pruefen",
       }));
 
     const commerceErrorShops = shops
@@ -129,7 +129,7 @@ export async function GET() {
       .map((shop) => ({
         shopDomain: shop.shopDomain || "unknown",
         commerceLastStatus: shop.commerceLastStatus || "error",
-        nextAction: shop.nextAction || "Commerce pruefen",
+        nextAction: shop.nextAction || "Commerce-Flow pruefen",
       }));
 
     const zeroCacheHitShops = shops
