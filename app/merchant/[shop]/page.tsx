@@ -86,14 +86,14 @@ export default async function MerchantPage({ params }: MerchantPageProps) {
         >
           <div>
             <div style={{ fontSize: 13, fontWeight: 700, color: "#2563eb", letterSpacing: 0.3 }}>
-              EFRO Merchant Dashboard
+              EFRO Dashboard
             </div>
             <h1 style={{ margin: "8px 0 0", fontSize: 34, lineHeight: 1.1 }}>
-              Dein KI-Verkäufer für {shopDomain}
+              Dein EFRO-Arbeitsstand für {shopDomain}
             </h1>
             <p style={{ margin: "12px 0 0", fontSize: 15, color: "#475569", maxWidth: 760 }}>
-              Hier sieht der Shop-Besitzer nur die Dinge, die für ihn wichtig sind:
-              Avatar, Stimme, Sprache, Aktivität und wie EFRO aktuell im Shop arbeitet.
+              Hier sieht der Betreiber nur die Dinge, die für ihn wichtig sind:
+              Avatar, Stimme, Sprache, Aktivität und wie EFRO aktuell im Zielkontext arbeitet.
             </p>
           </div>
 
@@ -128,7 +128,7 @@ export default async function MerchantPage({ params }: MerchantPageProps) {
         >
           {card("Gespräche 24h", conversations24h, "Wie oft EFRO heute aktiv genutzt wurde")}
           {card("Commerce-Aktionen", commerce24h, "Verkaufsnahe Aktionen / Checkout-nahe Schritte")}
-          {card("Produkte im Shop", productCount, "Aktuelle Produktbasis für Empfehlungen")}
+          {card("Inhalte im Ziel", productCount, "Aktuelle Inhaltsbasis für Empfehlungen")}
           {card("Warnungen", alerts.length, "Nur kundenrelevante Hinweise")}
         </div>
 
@@ -193,7 +193,7 @@ export default async function MerchantPage({ params }: MerchantPageProps) {
                 <div style={{ fontSize: 12, color: "#64748b", marginBottom: 6 }}>Sprache</div>
                 <div style={{ fontSize: 18, fontWeight: 700 }}>{settings.selectedLanguage || "de"}</div>
                 <div style={{ marginTop: 6, fontSize: 13, color: "#475569" }}>
-                  Aktuell passend für deinen Demo-/Shop-Stand ausgewählt.
+                  Aktuell passend für deinen Demo-/Zielstand ausgewählt.
                 </div>
               </div>
 

@@ -117,7 +117,7 @@ export default async function ShopDetailPage({
           <div>
             <h1 className="page-title">{shop.shopDomain}</h1>
             <p className="page-subtitle">
-              Shop-Detailansicht für Phase 1 mit Status, Aktivität, Alerts und nächster Operator-Aktion.
+              Ziel-Detailansicht für Phase 1 mit Status, Aktivität, Alerts und nächster Operator-Aktion.
             </p>
             <p className="small" style={{ marginTop: 10 }}>
               Datenquelle: <strong>{source === "supabase" ? "Supabase live" : "Mock-Fallback"}</strong>
@@ -165,7 +165,7 @@ export default async function ShopDetailPage({
                 href={`/api/ops/handoff?shop=${encodeURIComponent(shop.shopDomain)}`}
                 style={{ color: "#93c5fd", textDecoration: "none", fontWeight: 700 }}
               >
-                Handoff-Historie
+                Handoff- und Triage-Historie
               </Link>
             </div>
           </div>
