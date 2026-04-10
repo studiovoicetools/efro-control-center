@@ -272,7 +272,7 @@ export default async function AdminPage() {
             "Über alle Ziele mit Requests"
           )}
           {box(
-            "Global Audio Cache",
+            "Globaler Audio-Cache",
             Number(summary.globalAudioCacheEntryCount || 0),
             `Hits: ${Number(summary.globalAudioCacheHitCount || 0)}`
           )}
@@ -329,10 +329,10 @@ export default async function AdminPage() {
                         </div>
                         <div style={{ marginTop: 10, display: "flex", gap: 12, flexWrap: "wrap" }}>
                           {shopLink(shop.shopDomain, "/merchant", "Dashboard")}
-                          {shopLink(shop.shopDomain, "/internal/quality", "Quality")}
+                          {shopLink(shop.shopDomain, "/internal/quality", "Qualität")}
                           {shopLink(shop.shopDomain, "/api/ops/handoff?shop=", "Handoff")}
-                          {shopLink(shop.shopDomain, "/api/ops/evidence", "Evidence")}
-                          {shopLink(shop.shopDomain, "/api/ops/shop-config", "Config")}
+                          {shopLink(shop.shopDomain, "/api/ops/evidence", "Nachweise")}
+                          {shopLink(shop.shopDomain, "/api/ops/shop-config", "Konfiguration")}
                         </div>
                       </div>
                       <div style={{ textAlign: "right", minWidth: 150 }}>
@@ -549,9 +549,9 @@ export default async function AdminPage() {
                 <th style={{ padding: "10px 8px" }}>Status</th>
                 <th style={{ padding: "10px 8px" }}>Inhalte</th>
                 <th style={{ padding: "10px 8px" }}>Response Cache</th>
-                <th style={{ padding: "10px 8px" }}>Brain Req 24h</th>
-                <th style={{ padding: "10px 8px" }}>Brain Cache Hits</th>
-                <th style={{ padding: "10px 8px" }}>Audio Cache</th>
+                <th style={{ padding: "10px 8px" }}>Brain-Anfragen 24h</th>
+                <th style={{ padding: "10px 8px" }}>Brain-Cache-Hits</th>
+                <th style={{ padding: "10px 8px" }}>Audio-Cache</th>
                 <th style={{ padding: "10px 8px" }}>Commerce</th>
                 <th style={{ padding: "10px 8px" }}>Kosten 24h</th>
                 <th style={{ padding: "10px 8px" }}>Direkte Links</th>
