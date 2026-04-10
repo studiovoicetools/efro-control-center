@@ -232,7 +232,7 @@ export default async function AdminPage() {
           }}
         >
           <div>
-            <h1 style={{ margin: 0, fontSize: 34, lineHeight: 1.1 }}>EFRO Admin</h1>
+            <h1 style={{ margin: 0, fontSize: 34, lineHeight: 1.1 }}>EFRO Operator-Zentrale</h1>
             <p style={{ margin: "10px 0 0", color: "#b7c3ea", fontSize: 15 }}>
               Operator-Ansicht für Ziele, Watchdog, Qualität, Dashboard und Freeze-Status.
             </p>
@@ -337,7 +337,7 @@ export default async function AdminPage() {
                       </div>
                       <div style={{ textAlign: "right", minWidth: 150 }}>
                         <div style={{ fontSize: 13, color: "#9fb0e0" }}>
-                          Health {Number(shop.healthScore || 0)} / Priority {Number(shop.priorityScore || 0)}
+                          Health {Number(shop.healthScore || 0)} / Priorität {Number(shop.priorityScore || 0)}
                         </div>
                         <div style={{ marginTop: 8 }}>
                           <Link
@@ -447,7 +447,7 @@ export default async function AdminPage() {
                 padding: 14,
               }}
             >
-              <div style={{ fontSize: 12, color: "#9fb0e0", marginBottom: 8 }}>Summary-Status</div>
+              <div style={{ fontSize: 12, color: "#9fb0e0", marginBottom: 8 }}>Live-Summary</div>
               <div>
                 <span
                   style={{
@@ -495,7 +495,7 @@ export default async function AdminPage() {
                 padding: 14,
               }}
             >
-              <div style={{ fontSize: 12, color: "#9fb0e0", marginBottom: 8 }}>Public Health</div>
+              <div style={{ fontSize: 12, color: "#9fb0e0", marginBottom: 8 }}>Public-Health</div>
               <div style={{ fontSize: 24, fontWeight: 700, color: "#ffffff" }}>
                 {efroSummary?.public_health_consecutive_failures ?? "—"} / {efroSummary?.public_health_incident_threshold ?? "—"}
               </div>
