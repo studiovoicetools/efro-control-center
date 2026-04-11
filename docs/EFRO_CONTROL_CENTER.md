@@ -1,57 +1,85 @@
 # EFRO Control Center
 
+Stand: 2026-04-10
+
 ## Zweck
-Dieses Verzeichnis ist die zentrale, repo-übergreifende Steuerungs- und Wahrheitsbasis für EFRO.
-Hier werden Architektur, Evidenz, offene Risiken, Patch-Regeln und Go-Live-Kriterien gepflegt.
-Runtime-Code wird hier nicht entwickelt. Dieses Verzeichnis dient der Kontrolle, nicht der Produktlogik.
+
+Dieses Repository enthält das operative Control Center für EFRO.
+
+Das Control Center ist **nicht** die Live-Wahrheit selbst, sondern die
+- Visualisierung,
+- Aggregation,
+- Triage-
+- und Operator-Schicht
+
+über dem aktuellen EFRO-Livezustand.
+
+Die primäre Live-Wahrheit kommt aus dem **EFRO-Agent-Watchdog**.
+
+## Aktuelle operative Wahrheit
+
+Für den aktuellen Stand gilt:
+
+- **EFRO-Agent `/api/watchdog/summary` = primäre Live-Wahrheit**
+- **Control Center = Operationalisierung und Sichtbarmachung dieser Wahrheit**
+- **Handoffs = Triage / Historie, nicht primäre Live-Wahrheit**
+
+## Aktueller Reifegrad
+
+Das `efro-control-center` ist nach dem aktuellen Arbeitsstand operativ deutlich stabiler und sprachlich deutlich harmonisierter als in den frühen Phase-1-Dokumenten.
+
+Erreicht sind insbesondere:
+- `quality` mit verifiziertem `targetContext`
+- `liveTruth`-Einbindung in relevante Control-Center-Pfade
+- priorisierte `nextAction`-Logik
+- sichtbare UI-Harmonisierung in Overview, Detail, Onboarding, Admin und interner Quality-Sicht
+- deutlich reduzierte shop-/merchant-/produktlastige Sichtsprache
+
+## Was dieses Repo aktuell ist
+
+Dieses Repo ist heute:
+- das operative UI- und API-Control-Center für EFRO
+- die sichtbare Diagnose- und Operator-Schicht
+- der Ort für Control-Center-spezifische Harmonisierung und Triage-Verbesserungen
+
+Dieses Repo ist aktuell **nicht**:
+- die alleinige Systemwahrheit über alle EFRO-Komponenten
+- der alleinige Runtime-Ort des EFRO-Agenten
+- bereits vollständig intern plattformagnostisch
 
 ## Geltungsbereich
-Betroffene Repos:
-- efro
-- efro-widget
-- efro-brain
-- efro-shopify
 
-## Arbeitsregel
-Copilot und andere Agenten dürfen zunächst nur analysieren und dokumentieren.
-Ohne ausdrückliche Freigabe dürfen keine Runtime-Dateien geändert werden.
+Innerhalb dieses Repos werden vor allem gepflegt:
+- Control-Center-UI
+- Control-Center-APIs
+- sichtbare Operator- und Qualitätstexte
+- Handoff- und Triage-Dokumentation
 
-## Dokument-Hierarchie
-1. EFRO_CONTROL_CENTER.md
-2. ARCHITECTURE_OVERVIEW.md
-3. REPO_RELATIONS.md
-4. RUNTIME_FLOWS.md
-5. ENV_CONTRACT.md
-6. DEFINITION_OF_DONE.md
-7. PATCH_POLICY.md
-8. CURRENT_BUGS.md
-9. EVIDENCE_REGISTER.md
+Historisch gewachsene Bezüge auf `shop`, `merchant`, `shopDomain`, `productCount` oder Shopify-Routen können intern weiterhin bestehen, auch wenn die sichtbare Sprache inzwischen deutlich stärker target-/inhaltsbezogen ist.
 
-## Status-Labels
-- Belegt: direkt durch Datei, Pfad, Import, Route, Test, Log oder Konfiguration nachgewiesen
-- Wahrscheinlich: starke Indizien vorhanden, aber noch nicht vollständig end-to-end belegt
-- Unbestätigt: Annahme oder offener Punkt, darf nicht als Wahrheit behandelt werden
+## Lesereihenfolge für Nachfolger
 
-## Verbindliche Lesereihenfolge für jeden Agenten
-1. EFRO_CONTROL_CENTER.md
-2. PATCH_POLICY.md
-3. CURRENT_BUGS.md
-4. ARCHITECTURE_OVERVIEW.md
-5. REPO_RELATIONS.md
-6. RUNTIME_FLOWS.md
-7. ENV_CONTRACT.md
-8. DEFINITION_OF_DONE.md
-9. EVIDENCE_REGISTER.md
+1. `EFRO_CONTROL_CENTER.md`
+2. `EFRO_CONTROL_CENTER_MASTER.md`
+3. `HANDOFF_EFRO_CONTROL_CENTER_AND_AGENT_2026-04-10.md`
+4. `HANDOFF_EFRO_CONTROL_CENTER_AND_AGENT_2026-04-10_ADDENDUM_VERIFIED.md`
+5. `HANDOFF_EFRO_CONTROL_CENTER_PROFESSIONAL_2026-04-10.md`
 
-## Harte Regeln
-- kein patch ohne ausgabe
-- erst analyse, dann evidenz, dann plan, dann patch
-- kein stiller refactor
-- keine änderung ohne betroffene dateien
-- keine vermutung als fakten formulieren
-- bei unsicherheit muss "unbestätigt" notiert werden
-- vor jedem späteren patch: backup + patch plan a + patch plan b
+## Einordnung älterer Dokus
 
-## Aktueller Modus
-Analyse- und Architekturmodus.
-Copilot dient vorerst nur als Analyst.
+Ältere Phase-, Parkstand- und Spezifikationsdokumente bleiben als Historie relevant, sind aber **nicht automatisch der heutige Wahrheitsstand**.
+
+Wenn ältere und neuere Dokus voneinander abweichen, gilt:
+
+1. live verifizierter Stand
+2. professioneller Handoff / verifizierte Addenda
+3. ältere Master-/Phase-/Parkstand-Dokumente
+
+## Harte Regel für Folgearbeit
+
+Für operativen Live-Zustand immer zuerst den EFRO-Agent-Watchdog betrachten.
+
+Für weitere Arbeit im `efro-control-center` gilt:
+- erst aktuelle kanonische Doku lesen
+- dann Live-/API-Stand prüfen
+- erst danach patchen oder weiterharmonisieren
