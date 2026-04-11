@@ -1,26 +1,23 @@
-# EFRO Übergabe – Addendum (verifizierter Stand nach Runtime-Checks)
+# EFRO Übergabe – Addendum (verifizierter und konsolidierter Stand)
 
 Stand: 2026-04-10
-Bezieht sich auf: `docs/HANDOFF_EFRO_CONTROL_CENTER_AND_AGENT_2026-04-10.md`
+Bezieht sich auf:
+- `docs/HANDOFF_EFRO_CONTROL_CENTER_AND_AGENT_2026-04-10.md`
+- `docs/HANDOFF_EFRO_CONTROL_CENTER_PROFESSIONAL_2026-04-10.md`
 
 ## Zweck
 
-Dieses Addendum aktualisiert den Handoff auf den inzwischen **verifiziert erreichten** Stand.
-Es ersetzt nicht das ursprüngliche Handoff, sondern überschreibt gezielt die dort noch als offen markierten Punkte, soweit sie inzwischen live geprüft wurden.
+Dieses Addendum hält die Punkte fest, die gegenüber älteren Übergaben und Zwischenständen als **live verifiziert oder fachlich konsolidiert** gelten.
+
+Es dient nicht mehr als reine Fehlerliste, sondern als kurze Klarstellung, welche früher offenen Punkte inzwischen geschlossen sind.
 
 ---
 
 ## 1. Verifiziert geschlossen: `quality.targetContext`
 
-Der zuvor offene Punkt
-- `quality hat noch keine verifizierte targetContext-Ausgabe`
+Der frühere offene Punkt zu `quality.targetContext` ist geschlossen.
 
-ist **nicht mehr offen**.
-
-Live verifiziert wurde für:
-- `GET /api/ops/quality/avatarsalespro.myshopify.com`
-
-Dabei wurde erfolgreich bestätigt:
+Verifiziert wurde für `GET /api/ops/quality/avatarsalespro.myshopify.com`:
 - `ok = true`
 - `liveTruth.summaryStatus = green`
 - `targetContext.canonicalType = target`
@@ -29,134 +26,96 @@ Dabei wurde erfolgreich bestätigt:
 - `targetContext.label = avatarsalespro.myshopify.com`
 - `targetContext.platformAgnostic = true`
 
-Wichtige Ursache des früheren Fehlers:
-- die Source-Route war bereits korrekt gepatcht
-- der laufende Next-Prozess auf Port 3010 lieferte zunächst noch einen alten Build aus
-- nach Rebuild + Neustart war der Payload korrekt
-
 Konsequenz:
-- Abschnitt `7.1` des ursprünglichen Handoffs ist fachlich **überholt**
-- Priorität `quality targetContext verifizieren / fixen` ist **erledigt**
+- frühere Aussagen, `quality.targetContext` sei noch offen, sind überholt
 
 ---
 
-## 2. Verifiziert erreicht: weitere sprachliche Neutralisierung in `quality` und `watchdog`
+## 2. Verifiziert verbessert: `quality`- und `watchdog`-Texte
 
-Zusätzlich wurde die verbleibende shop-/produkt-/kataloglastige Sprache in den relevanten Control-Center-Pfaden weiter neutralisiert und live verifiziert.
+Die kritischen shop-/produktlastigen Laufzeittexte in den relevanten `quality`- und `watchdog`-Pfaden wurden bereinigt.
 
-### 2.1 Verifizierte `quality`-Änderungen
-
-Live sichtbar in `/api/ops/quality/avatarsalespro.myshopify.com`:
-- `nextAction = Installation, Zugriffsdaten und Inhaltssynchronisierung sofort prüfen`
-- Alert-Titel: `Keine verwertbaren Inhalte gefunden`
-- Alert-Detail: `Für dieses Ziel wurden aktuell keine verwertbaren Inhalte oder Angebote gefunden.`
-
-### 2.2 Verifizierte `watchdog`-Änderungen
-
-Live sichtbar in `/api/ops/watchdog`:
+Verifizierte Beispiele:
 - `Installation, Zugriffsdaten und Inhaltssynchronisierung sofort prüfen`
 - `Inhaltssynchronisierung und Event-Anbindung prüfen`
-
-Wichtig:
-- der ursprünglich dokumentierte Hinweis auf gemischte Alttexte wie
-  `naechste aktion: Shop-Installation, Token und Produkt-Sync sofort prüfen.`
-  ist für die jetzt live geprüften `quality`- und `watchdog`-Pfade **überholt**
-- eine vollständige Gesamtneutralisierung des gesamten Control Centers ist damit **noch nicht abgeschlossen**, aber die zuvor kritisch sichtbaren Resttexte in diesen beiden Pfaden sind bereinigt
+- `Keine verwertbaren Inhalte gefunden`
+- `Für dieses Ziel wurden aktuell keine verwertbaren Inhalte oder Angebote gefunden.`
 
 Konsequenz:
-- Abschnitt `7.3` des ursprünglichen Handoffs ist für `quality`/`watchdog` **überholt**
-- Priorität `weitere sprachliche Neutralisierung` bleibt als allgemeine Restarbeit bestehen, aber die klar sichtbaren Runtime-Texte in `quality` und `watchdog` sind bereits verbessert und verifiziert
+- die früher sichtbaren groben Alttexte in diesen Pfaden gelten nicht mehr als aktueller Hauptmangel
 
 ---
 
-## 3. Git-/Arbeitsstand ist jetzt sauberer als im Ursprungshandoff
+## 3. Verifiziert verbessert: `nextAction`-Priorisierung
 
-Im Verlauf nach dem ursprünglichen Handoff wurde `efro-control-center` als echtes Git-Repo aufgesetzt und mit dem Remote verbunden:
-- Remote: `https://github.com/studiovoicetools/efro-control-center.git`
-- Initial Import wurde erfolgreich nach GitHub gepusht
-- Deploy-Key / SSH-Pfad für den Server wurde erfolgreich eingerichtet
+Die frühere Inkonsistenz in `buildNextAction()` ist nicht mehr offen.
 
-Relevante Branches:
-- `main` = Initialimport
-- `parallel/neutralize-quality-language-20260410` = konsolidierter Arbeitsbranch mit dem Sprach-Cleanup
-- `parallel/prioritize-next-action-20260410` = Branch für die Priorisierung von `buildNextAction()`
+Die Priorisierung wurde so geschärft, dass Commerce-/Aktionsfehler nicht mehr vom stale-sync-Fall überdeckt werden, wenn sie operativ dringlicher sind.
 
 Konsequenz:
-- die frühere Aussage, der Worktree-/Git-Flow für `efro-control-center` sei nicht zuverlässig nutzbar, war für den damaligen Stand richtig
-- sie ist für den **neuen** Stand nur noch teilweise wahr
-- Git/Remote/Branch-Arbeit ist jetzt grundsätzlich möglich und praktisch einsetzbar
+- die Priorisierungsfrage gilt für den aktuellen Stand als bewusst entschieden
 
 ---
 
-## 4. Verifiziert erreicht: fachliche Priorisierung in `buildNextAction()`
+## 4. Verifiziert verbessert: sichtbare Restharmonisierung
 
-Die zuvor noch offene Priorisierungsfrage in `buildNextAction()` ist inzwischen **bewusst entschieden und live verifiziert**.
+Seit dem ursprünglichen Addendum wurde die sichtbare Harmonisierung des Control Centers deutlich weitergeführt.
 
-Frühere Reihenfolge:
-1. fehlende Inhaltsbasis
-2. stale sync
-3. Commerce-Fehler
-
-Jetzt gültige Reihenfolge:
-1. fehlende Inhaltsbasis
-2. Commerce-Fehler
-3. stale sync
-
-Ziel dieser Änderung:
-- bei gemischten Problemfällen soll die operativ schärfere Aktion sichtbar werden
-- Commerce-Fehler sollen nicht mehr von einem gleichzeitig vorhandenen stale-sync-Fall überdeckt werden
-
-Live verifiziert in `/api/ops/watchdog`:
-- für `avatarsalespro-dev.myshopify.com` zeigt `criticalShops.nextAction` jetzt `Commerce-Flow und Aktionsfehler prüfen`
-- für `avatarsalespro-dev.myshopify.com` zeigt `commerceErrorShops.nextAction` jetzt ebenfalls `Commerce-Flow und Aktionsfehler prüfen`
+Zusätzliche bereinigte Beispiele:
+- `Response Cache` → `Antwort-Cache`
+- `Readiness Score` → `Bereitschaftsgrad`
+- `Settings-Quelle` → `Konfigurationsquelle`
+- `Evidence öffnen` → `Nachweise öffnen`
+- `Mock-Fallback` → `Fallback-Daten`
+- `Alert` / `unknown` / `Hits` → `Hinweis` / `unbekannt` / `Treffer`
+- `EFRO Admin` → `EFRO Operator-Zentrale`
+- `Summary-Status` → `Live-Summary`
+- `Priority` → `Priorität`
 
 Konsequenz:
-- die frühere Aussage, `staleSync` gewinne aktuell vor dem Commerce-Fehler, ist **überholt**
-- die Priorisierungsfrage ist für den jetzt verifizierten Stand **nicht mehr offen**
+- der Schwerpunkt liegt nicht mehr auf grober sichtbarer Restharmonisierung, sondern – falls weitergearbeitet wird – auf struktureller Plattform-Agnostik
 
 ---
 
-## 5. Was weiterhin offen bleibt
+## 5. Git-/Arbeitsstand
 
-Trotz der verifizierten Fortschritte bleiben diese Punkte offen:
+`efro-control-center` ist arbeitsfähig als echtes Git-Repo mit Remote und Parallel-Branches.
 
-1. **Breitere sprachliche Harmonisierung**
-   - `shopDomain`, `merchant`, `productCount` und weitere Altsemantiken bestehen weiterhin in anderen Bereichen
-   - das ist keine unmittelbare Runtime-Störung, aber fachlich noch nicht Endzustand
+Der aktuell maßgebliche Abschlussstand des Polishing-Zyklus ist:
+- Branch: `parallel/control-center-polish-20260410-closing-visible-rests`
+- Relevanter Abschluss-Commit: `c0326c7`
 
-2. **Weitere Feinschliffe in der Operativlogik**
-   - auch nach der neuen Priorisierung kann es weitere sinnvolle Schärfungen geben, z. B. in Overview-/Triage-Formulierungen oder zusätzlichen Prioritätsregeln
-   - das ist aber kein Grundreparaturpunkt mehr
-
-3. **Keine Änderungen an anderen Repos aus diesem Chat ableiten**
-   - die Systemgrenze des ursprünglichen Handoffs bleibt bestehen:
-   - operative Arbeit hier nur im `efro-control-center`
+Konsequenz:
+- Aussagen, Git/Branch-Arbeit sei im Repo grundsätzlich nicht praktikabel, sind für den heutigen Stand überholt
 
 ---
 
-## 6. Aktualisierte Kurzfassung für den Nachfolger
+## 6. Was weiterhin offen bleibt
 
-Wenn du nur den jetzt gültigen Kurzstand brauchst:
+Weiterhin offen, aber **nicht** mehr als einfacher UI-Polish:
 
-- **EFRO-Agent liefert die operative Live-Wahrheit**.
-- **Control Center liest diese Wahrheit und operationalisiert sie**.
-- `handoff`, `shop`, `quality` lesen `efroAgent` / `liveTruth`.
-- `quality` liefert jetzt **verifiziert** auch `targetContext`.
-- `quality` und `watchdog` zeigen in den live geprüften Pfaden bereits neutralisierte Sprache.
-- `buildNextAction()` priorisiert jetzt nach fehlender Inhaltsbasis den Commerce-Fehler vor stale sync.
-- `efro-control-center` ist jetzt als Git-Repo mit Remote und Branches arbeitsfähig.
-- Nächster sinnvoller Schritt ist nicht mehr Grundreparatur, sondern weitere Restharmonisierung und Feinschliff.
+1. interne Feldnamen wie `shopDomain`, `productCount`
+2. historische Routen wie `/shops/...`, `/merchant/...`, `/api/ops/shop-config/...`
+3. tiefere API-/Datenmodell-Semantik
+4. vollständige interne Plattform-Agnostik
 
 ---
 
-## 7. Merksatz nach aktuellem Stand
+## 7. Aktualisierte Kurzfassung
+
+- **EFRO-Agent liefert die operative Live-Wahrheit.**
+- **Control Center operationalisiert und visualisiert diese Wahrheit.**
+- `quality.targetContext` ist verifiziert geschlossen.
+- `nextAction`-Priorisierung ist bewusst geschärft.
+- die sichtbare Restharmonisierung ist weitgehend abgeschlossen.
+- die nächste sinnvolle Phase wäre nicht weiterer Mikro-Polish, sondern ein bewusster target-first / plattformagnostischer Strukturblock.
+
+---
+
+## 8. Merksatz
 
 **Live-Wahrheit = EFRO-Agent-Watchdog.**
 
-**Control Center = Operationalisierung dieser Wahrheit.**
+**Control Center = Diagnose- und Operator-Schicht über dieser Wahrheit.**
 
-**`quality.targetContext` = verifiziert geschlossen.**
-
-**`buildNextAction()`-Priorisierung = bewusst angepasst und live verifiziert.**
-
-**Nächste Arbeit = Restharmonisierung und Feinschliff, nicht mehr Grundreparatur.**
+**Die nächste echte Restarbeit liegt eher in interner Struktur als in sichtbaren UI-Alttexten.**

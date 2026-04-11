@@ -1,167 +1,98 @@
-EFRO Control Center Master
+# EFRO Control Center Master
 
-Stand: 2026-03-28
+Stand: 2026-04-10
 
-Zweck
+## Zweck
 
-EFRO braucht ein professionelles Kontrollsystem, das alle installierten Shops sichtbar macht, Probleme früh erkennt, Kosten transparent überwacht und klare nächste Schritte vorgibt. Dieses Control Center ist die operative Single Source of Truth nach der Shopify-Einreichung.
+Dieses Dokument ist die aktuelle Master-Zusammenfassung für den operativen Stand des `efro-control-center`.
 
-Eingefrorener Submission-Stand
+Es beschreibt nicht mehr den frühen Submission-/Phase-1-Wunschzustand, sondern den heute tatsächlich erreichten Stand nach den Arbeiten an:
+- Live-Truth-Anbindung an den EFRO-Agenten
+- Quality-/Watchdog-Operationalisierung
+- sichtbarer Restharmonisierung des Control Centers
 
-Dieses Dokument basiert auf dem eingefrorenen Submission-Stand.
+## Aktuelle Kernwahrheiten
 
-Eingefrorene Repos
-efro-brain
-Freeze-Tag: submission-freeze-2026-03-28-164814-efro-brain
-Freeze-Commit: 8a606de80b7fa2bd40221c1d454406a0f9457174
-efro-shopify
-Freeze-Tag: submission-freeze-2026-03-28-164814-efro-shopify
-Freeze-Commit: 0ddf457f478425f0b483808e0076add368b1c900
-efro-widget
-Freeze-Tag: submission-freeze-2026-03-28-164814-efro-widget
-Freeze-Commit: ba946c471f241584d8c11e068d219206691a6270
-Entwicklungszweige nach Submission
-parallel/efro-brain-2026-03-28-164814
-parallel/efro-shopify-2026-03-28-164814
-parallel/efro-widget-2026-03-28-164814
-Mission
+### 1. Live-Wahrheit
+- **EFRO-Agent `/api/watchdog/summary` ist die primäre Live-Wahrheit**
+- das Control Center soll diesen Status primär lesen und sichtbar machen
 
-Das Control Center muss diese Fragen sofort beantworten:
+### 2. Rolle des Control Centers
+Das Control Center ist heute vor allem:
+- Diagnose-Schicht
+- Operator-Schicht
+- Triage-/Handoff-Schicht
+- Quality-/Detail-/Overview-Schicht
 
-Welche Shops sind gesund?
-Welche Shops sind kaputt oder degradiert?
-Was ist genau fehlgeschlagen?
-Wie teuer ist EFRO pro Shop?
-Welches Problem muss zuerst behoben werden?
-Kernansichten
-1. Ops
+Es ist **nicht** die alleinige Runtime-Wahrheit, sondern die Operationalisierung dieser Wahrheit.
 
-Pro Shop:
+### 3. Plattform-Semantik
+Die sichtbare Sprache des Control Centers ist deutlich stärker target-/inhaltsbezogen als zu Beginn.
 
-Shop-Domain
-Plan
-Installationsstatus
-aktiv / inaktiv
-letzte Aktivität
-letzter erfolgreicher Produkt-Sync
-letzte erfolgreiche Widget-Session
-letzte erfolgreiche Chat-Antwort
-letzte Warnung / letzter Fehler
-Health Score
-Statusfarbe: Grün / Gelb / Rot
-2. Katalog
+Dennoch bestehen intern weiterhin historische Reste in:
+- Routen
+- Feldnamen
+- Datenannahmen
 
-Pro Shop:
+Daher gilt aktuell:
+- **sichtbar weitgehend harmonisiert**
+- **intern noch nicht vollständig plattformagnostisch**
 
-Gesamtzahl Produkte
-Zahl verkaufbarer Produkte
-potenzielle Duplikate
-Produkte ohne Bild
-Produkte ohne Preis
-Produkte ohne Kategorie / Product Type
-Warnung bei veraltetem Sync
-fehlerhafte Produktlinks / Handles
-3. Voice & Kosten
+## Was im aktuellen Stand erreicht ist
 
-Pro Shop:
+### Quality / Target Context
+- `quality` liefert verifiziert `targetContext`
+- `liveTruth.summaryStatus` bleibt grün
+- `targetContext` und `liveTruth` sind gemeinsam sichtbar
 
-gesamte Brain-Requests
-Brain-Cache-Hits
-gesamte TTS-Requests
-TTS-Cache-Hits
-geschätzte Sprechsekunden
-geschätzte ElevenLabs-Kosten
-geschätzte MascotBot-Kosten
-Kosten pro Tag / 7 Tage / 30 Tage
-Anomalie-Warnung bei Voice-Spitzen
-4. Alerts
+### Watchdog / Next Action
+- `nextAction` priorisiert operativ sinnvoller
+- Commerce-/Aktionsfehler werden nicht mehr hinter stale sync versteckt
 
-Pro Shop:
+### Sichtbare UI-Harmonisierung
+Die wichtigsten sichtbaren Restbegriffe wurden harmonisiert, u. a.:
+- `Shops` → `Ziele`
+- `Produkte` → `Inhalte`
+- `Merchant` / `Merchant-Dashboard` → `Dashboard`
+- `Shop-Detail öffnen` → `Ziel-Detail öffnen`
+- `Response Cache` → `Antwort-Cache`
+- `Readiness Score` → `Bereitschaftsgrad`
+- `Evidence` → `Nachweise`
+- `Mock-Fallback` → `Fallback-Daten`
 
-kein erfolgreicher Sync seit N Stunden
-keine Produkte oder verdächtig niedrige Produktzahl
-Session-Token-Check fehlgeschlagen
-wiederholte Widget-Startfehler
-wiederholte Brain-Fehler
-sichtbare doppelte Produkte
-ungewöhnlicher Kostensprung
-Shop inaktiv / deinstalliert / Token fehlt
-Minimale Datenquellen
+## Aktuell maßgeblicher Arbeitsstand
 
-Das Control Center soll Daten zusammenführen aus:
+Bester Arbeitsstand für spätere Main-Promotion:
+- Branch: `parallel/control-center-polish-20260410-closing-visible-rests`
+- Relevanter Abschluss-Commit: `c0326c7`
 
-efro_shops
-products
-cache_responses
-cache_audio
-efro_action_log
-Shopify-Server-Events für Auth / Installation / Webhooks
-Widget-Events für Chat / Voice / Fehler
-nächtliche Ollama-Zusammenfassungen und Risikobewertungen
-Einheitliches Ereignismodell
+## Was noch offen ist
 
-Jedes kritische Ereignis soll auf ein einheitliches Ops-Format normalisiert werden:
+Nicht mehr als UI-Polish, sondern als nächste Phase:
+- strukturelle Plattform-Agnostik innerhalb des Repos
+- vorsichtige target-first-Kompatibilität in Routen und Datenfeldern
+- Abbau historischer `shop*`-Semantik ohne Breaking Changes
 
-{
-  "ts": "ISO-8601",
-  "env": "prod|staging|dev",
-  "shop": "shop-domain",
-  "component": "brain|shopify|widget|voice|cache|catalog|ops",
-  "event": "short_machine_name",
-  "ok": true,
-  "severity": "info|warn|error",
-  "trace_id": "uuid-or-correlation-id",
-  "ms": 0,
-  "meta": {}
-}
-Ziel-Health-Score
+## Was als historisch zu lesen ist
 
-Ein einzelner Shop-Health-Score soll berechnet werden aus:
+Ältere Phase-, Parkstand- und Spezifikationsdokumente bleiben als Verlauf relevant, sind aber nicht automatisch heutige Wahrheit.
 
-Installationsstatus
-Frische des Syncs
-Katalogqualität
-Erfolgsrate der Antworten
-Cache-Effizienz
-Voice-Zuverlässigkeit
-Zahl offener Alerts
-Kostenanomalien
+Wenn ältere und neuere Dokus kollidieren, gilt:
+1. live verifizierter Runtime-Stand
+2. aktuelle Handoffs / verifizierte Addenda
+3. diese Master-Doku
+4. ältere Phase-/Parkstand-/Spec-Dokumente
 
-Bewertung:
+## Empfohlene nächste Lesereihenfolge
 
-90-100 = Grün
-70-89 = Gelb
-0-69 = Rot
-Sofortige Nicht-Ziele
+1. `EFRO_CONTROL_CENTER.md`
+2. `EFRO_CONTROL_CENTER_MASTER.md`
+3. `HANDOFF_EFRO_CONTROL_CENTER_AND_AGENT_2026-04-10.md`
+4. `HANDOFF_EFRO_CONTROL_CENTER_AND_AGENT_2026-04-10_ADDENDUM_VERIFIED.md`
+5. `HANDOFF_EFRO_CONTROL_CENTER_PROFESSIONAL_2026-04-10.md`
 
-Vor Abschluss der Shopify-Prüfung machen wir nicht:
+## Kurzfazit
 
-vollständigen Ersatz von MascotBot
-vollständigen Ersatz von ElevenLabs
-kompletten Website-Relaunch
-Landingpage-Feinschliff vor operativer Transparenz
-Operative Prioritäten
-Zuerst Sichtbarkeit schaffen.
-Danach Kostenkontrolle aufbauen.
-Danach Automatisierung hinzufügen.
-Danach Ersatzarchitektur ausbauen.
-Rolle von Ollama im Control Center
+Das `efro-control-center` ist für den sichtbaren Restharmonisierungsauftrag weitgehend in einem guten Abschlusszustand.
 
-Ollama ist nicht zuerst der Live-Verkäufer. Ollama ist zuerst das Überwachungs- und Diagnose-Gehirn.
-
-Ollama-Aufgaben
-Vorfallszusammenfassungen
-nächtliche Shop-Audits
-ähnliche Fehler gruppieren
-Shops nach Risiko priorisieren
-wahrscheinliche Ursachen aus Logs und Metriken erklären
-konkrete Reihenfolge für Fixes vorschlagen
-Phase-1-Ergebnis
-
-Phase 1 ist erst dann fertig, wenn:
-
-alle installierten Shops in einem Dashboard sichtbar sind
-jeder Shop Status und letzte Aktivität hat
-letzter Sync und letzter Fehler pro Shop sichtbar sind
-kostenrelevante Zähler sichtbar sind
-kaputte Shops ohne manuelles Suchen auffallen
+Die nächste sinnvolle Arbeit ist nicht weiterer Mikro-Polish, sondern – falls gewünscht – ein bewusster interner Schritt Richtung target-first / plattformagnostische Strukturangleichung.
